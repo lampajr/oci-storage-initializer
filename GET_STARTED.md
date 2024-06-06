@@ -23,6 +23,9 @@ make VERSION=${VERSION} image-build
 
 This will generate a new container image like `quay.io/${USER}/oci-storage-initializer:${VERSION}`
 
+> [!NOTE]
+> If testing locally using Podman, you might need to ensure the parameter `--load` is passed to the `docker build` command so you can later inject the local-built image inside KinD.
+
 ### Create the environment
 
 We assume all [prerequisites](#prerequisites) are satisfied at this point.
@@ -62,6 +65,7 @@ spec:
   container:
     name: storage-initializer
     image: quay.io/$USER/oci-storage-initializer:${VERSION}
+    imagePullPolicy: IfNotPresent # NOT FOR PROD but allow easier testing of local images with KinD (just remove for prod)
     resources:
       requests:
         memory: 100Mi
@@ -102,7 +106,7 @@ EOF
 
 1. Check `InferenceService` status
    ```bash
-   kubectl get inferenceservices iris-model -n kserve-test
+   kubectl get inferenceservices sklearn-iris -n kserve-test
    ```
 
 2. Determine the ingress IP and ports
