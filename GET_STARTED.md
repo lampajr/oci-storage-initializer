@@ -11,7 +11,8 @@ OCI protocol KServe custom storage initializer.
 
 ### Build local oci-storage-initializer
 
-> **NOTE**: You can skip this step if you want to use an existing container image
+> [!NOTE]
+> You can skip this step if you want to use an existing container image
 
 ```bash
 export VERSION=<replace>
@@ -49,7 +50,7 @@ We assume all [prerequisites](#prerequisites) are satisfied at this point.
    ```bash
    kind load docker-image quay.io/${USER}/oci-storage-initializer:${VERSION}
    ```
-   > **NOTE**: Skip this step if you are using a publicly available image
+   > Skip this step if you are using a publicly available image
 
 ## First InferenceService with OCI artifact URI
 

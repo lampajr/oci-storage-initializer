@@ -1,9 +1,26 @@
 # OCI KServe Custom Storage Initializer
 
-This repository provides an example of [KServer custom storage initializer](https://kserve.github.io/website/latest/modelserving/storage/storagecontainers/) 
-that showcases how users can automate a machine learning model deployment stored as OCI artifact using KServe.
+Have you ever wondered to deploy an ML model by directly referencing an OCI artifact that contains your model?
 
-> **NOTE**: This repository was mainly intended for demoing purposes
+This repository provides an example of [KServe custom storage initializer](https://kserve.github.io/website/latest/modelserving/storage/storagecontainers/) 
+that showcases how users can automate the deployment using Kserve of an ML model that is stored as OCI artifact.
+
+Users can then create an `InferenceService` like this one and the job is done :smile:
+```yaml
+   apiVersion: "serving.kserve.io/v1beta1"
+   kind: "InferenceService"
+   metadata:
+     name: "sklearn-iris"
+   spec:
+     predictor:
+       model:
+         modelFormat:
+           name: sklearn
+         storageUri: "oci-artifact://quay.io/<path-to-your-greatest-model>"
+```
+
+> [!NOTE]
+> This repository was mainly intended for demoing purposes
 
 The implementation was inspired by the default [KServe storage container](https://github.com/kserve/kserve/blob/1c51eeee174330b076e4171e6d71e9138f2510b3/python/kserve/kserve/storage/storage.py),
 this means that its integration should be pretty straightforward if required at some point.
@@ -21,7 +38,8 @@ Prerequisites:
 * Python
 * Poetry
 
-> **NOTE**: I would suggest to use a Python virtual environment as development environment
+> [!NOTE]
+> I would suggest to use a Python virtual environment as development environment
 
 Install the dependencies:
 ```bash
